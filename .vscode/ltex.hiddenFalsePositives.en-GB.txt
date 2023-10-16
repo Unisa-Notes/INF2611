@@ -1,0 +1,6 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Qverb|setSingleShot(True): sets the timer to generate a timeout signal only once.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[yyyy] Year as four digits.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[yy] Year as two digits.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[MMMM] Month in long form.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[dddd] Day in long form.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[ddd] Day in abbreviated form.\\E$"}

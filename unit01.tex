@@ -1,0 +1,207 @@
+\documentclass[notes.tex]{subfiles}
+
+\begin{document}
+	\chapter{Advanced Widgets}
+		\section{System Clock Time in LCD}
+			LCD-like digits are displayed using the LCD Number widget, an instance of the \verb|QLCDNumber| class.
+			\begin{sidenote}{QLCDNumber Methods}
+				\begin{itemize}[nosep]
+					\item \verb|setMode(modeType) -> None|, where \verb|modeType| is \verb|Hex|, \verb|Dec|, \verb|Oct|, or \verb|Bin|. \verb|Dec| is default.
+					\item \verb|display() -> None|
+					\item \verb|value() -> int|
+				\end{itemize}
+			\end{sidenote}
+
+			\subsection{Timers}
+				Used to perform repetitive tasks. Uses an instance of \verb|QTimer| class. Connect the \verb|timeout()| signal of \verb|QTimer| to the slot that performs the desired task.
+				\begin{sidenote}{Timeout Signals}
+					\begin{itemize}[nosep]
+						\item \verb|start(n)|: sets the timer to generate a timeout signal at $n$ millisecond intervals.
+						\item \verb|setSingleShot(True)|: sets the timer to generate a timeout signal only once.
+						\item \verb|singleShot(n)|: sets timer to generate timeout signal only once after $n$ milliseconds.
+					\end{itemize}
+				\end{sidenote}
+
+			\subsection{System Clock Time}
+				Use \verb|QTime| to get system clock time, and measure span of elapsed time. Time returned is in 24-hour format.
+				\begin{sidenote}{QTime Methods}
+					\vspace{-0.5cm}
+					\begin{multicols}{2}
+						\begin{itemize}[nosep]
+							\item \verb|currentTime()|
+							\item \verb|hour()|
+							\item \verb|minute()|
+							\item \verb|seconds()|
+							\item \verb|msec()|
+							\item \verb|addSecs()|
+							\item \verb|addMSecs()|
+							\item \verb|secsTo()|
+							\item \verb|msecsTo()|
+						\end{itemize}
+					\end{multicols}
+				\end{sidenote}
+
+		\section{Calendars and Dates}
+			Calendars are displayed using the \verb|QCalendarWidget| class. By default, it displays the current month and year. Days displayed in abbreviated forms, and weekends marked in red. Week numbers displayed, Sunday is first column.
+			\begin{sidenote}{QCalendarWidget Properties}
+				\begin{itemize}[nosep]
+					\item \verb|minimumDate|
+					\item \verb|maximumDate|
+					\item \verb|selectionMode|: Set to \verb|NoSelection| to prevent user from selecting date.
+					\item \verb|verticalHeaderFormat|: Set to \verb|NoVerticalHeader| to remove week numbers.
+					\item \verb|gridVisible|
+					\item \verb|HorizontalHeaderFormat|
+						\begin{itemize}[nosep]
+							\item \verb|SingleLetterDayNames|
+							\item \verb|ShortDayNames|
+							\item \verb|LongDayNames|
+							\item \verb|NoHorizontalHeader|
+						\end{itemize}
+				\end{itemize}
+			\end{sidenote}
+			\begin{sidenote}{QCalendarWidget Methods}
+				\vspace{-0.5cm}
+				\begin{multicols}{2}
+					\begin{itemize}[nosep]
+						\item \verb|selectedDate()|
+						\item \verb|monthShown()|
+						\item \verb|yearShown()|
+						\item \verb|setFirstDayOfWeek()|
+						\item \verb|selectionChanged()|
+					\end{itemize}
+				\end{multicols}
+			\end{sidenote}
+
+			\subsection{QDate}
+				Date selected in \verb|QCalendarWidget| returned as a \verb|QDate| object. Contains a calendar date with year, month, and day in Gregorian calendar. Current date read from system clock.
+				\begin{sidenote}{QDate Methods}
+					\vspace{-0.5cm}
+					\begin{multicols}{3}
+						\begin{itemize}[nosep]
+							\item \verb|currentDate()|
+							\item \verb|setDate()|
+							\item \verb|year()|
+							\item \verb|month()|
+							\item \verb|day()|
+							\item \verb|dayOfWeek()|
+							\item \verb|addDays()|
+							\item \verb|addMonths()|
+							\item \verb|addYears()|
+							\item \verb|daysTo()|
+							\item \verb|daysInMonth()|
+							\item \verb|daysInYear()|
+							\item \verb|isLeapYear()|
+							\item \verb|toPyDate()|
+						\end{itemize}
+					\end{multicols}
+				\end{sidenote}
+				\begin{sidenote}{Date Formats}
+					\vspace{-0.5cm}
+					\begin{multicols}{2}
+						\begin{description}[nosep, style=nextline, leftmargin=1cm, font=\texttt]
+							\item[d] Day as a number, no leading zero.
+							\item[dd] Day as a number, leading zero.
+							\item[ddd] Day in abbreviated form.
+							\item[dddd] Day in long form.
+							\item[M] Month as a number, no leading zero.
+							\item[MM] Month as a number, leading zero.
+							\item[MMM] Month in abbreviated form.
+							\item[MMMM] Month in long form.
+							\item[yy] Year as two digits.
+							\item[yyyy] Year as four digits.    
+						\end{description}
+					\end{multicols}
+				\end{sidenote}
+			\pagebreak
+
+			\subsection{QDateEdit}
+				Display the date a user selects in a Calendar widget. Used for displaying and editing dates.
+				\begin{sidenote}{QDateEdit Properties}
+					\vspace{-0.5cm}
+					\begin{multicols}{2}
+						\begin{itemize}[nosep]
+							\item \verb|minimumDate|
+							\item \verb|maximumDate|
+						\end{itemize}
+					\end{multicols}
+				\end{sidenote}
+				\begin{sidenote}{QDateEdit Methods}
+					\vspace{-0.5cm}
+					\begin{multicols}{2}
+						\begin{itemize}[nosep]
+							\item \verb|setDate()|
+							\item \verb|setDisplayFormat()|
+						\end{itemize}
+					\end{multicols}
+					\vspace{-0.5cm}
+					If an invalid date format is specified, the format will not be set.
+				\end{sidenote}
+
+		\section{Combo Boxes}
+			Used to display a pop-up list. Uses the \verb|QComboBox| class. Both texts and pixmaps can be displayed.
+			\begin{sidenote}{QComboBox Methods}
+				\vspace{-0.5cm}
+				\begin{multicols}{3}
+					\begin{itemize}[nosep]
+						\item \verb|setItemText()|
+						\item \verb|removeItem()|
+						\item \verb|clear()|
+						\item \verb|currentText()|
+						\item \verb|setCurrentIndex()|
+						\item \verb|count()|
+						\item \verb|setMaxCount()|
+						\item \verb|setEditable()|
+						\item \verb|addItem()|
+						\item \verb|addItems()|
+						\item \verb|itemText()|
+						\item \verb|currentIndex()|
+					\end{itemize}
+				\end{multicols}
+			\end{sidenote}
+			\begin{sidenote}{QComboBox Signals}
+				\vspace{-0.5cm}
+				\begin{multicols}{2}
+					\begin{itemize}[nosep]
+						\item \verb|currentIndexChanged()|
+						\item \verb|activated()|
+						\item \verb|highlighted()|
+						\item \verb|editTextChanged()|
+					\end{itemize}
+				\end{multicols}
+			\end{sidenote}
+
+		\section{Tables}
+			To display contents in a table, use a \verb|QTableWidget|. The items displayed in a Table Widget are instances of the \verb|QTableWidgetItem| class.
+
+			If a table uses a custom data model, use the \verb|QTableView| class.
+			\begin{sidenote}{QTableWidget Methods}
+				\vspace{-0.5cm}
+				\begin{multicols}{3}
+					\begin{itemize}[nosep]
+						\item \verb|setRowCount()|
+						\item \verb|setColumnCount()|
+						\item \verb|rowCount()|
+						\item \verb|columnCount()|
+						\item \verb|clear()|
+						\item \verb|setItem()|
+					\end{itemize}
+				\end{multicols}
+			\end{sidenote}
+			\begin{sidenote}{QTableWidgetItem Methods}
+				\vspace{-0.5cm}
+				\begin{multicols}{3}
+					\begin{itemize}[nosep]
+						\item \verb|setFont()|
+						\item \verb|setCheckState()|
+						\item \verb|checkState()|
+					\end{itemize}
+				\end{multicols}
+			\end{sidenote}
+
+		\section{Graphics}
+			\verb|QGraphicsView| is used for viewing and managing 2D graphical items. It displays a scene which is a container for graphic items. A scene is created using \verb|QGraphicsScene|, and items using \verb|QGraphicsItem|.
+
+			Add items to a scene using \verb|addItem()|, and remove them using \verb|removeItem()|. To add the scene to a view, n order to display it, use the \verb|setScene()| function for \verb|QGraphicsView|.
+
+		\rulechapterend
+\end{document}
