@@ -1,0 +1,69 @@
+\documentclass[notes.tex]{subfiles}
+
+\begin{document}
+	\setcounter{chapter}{1}
+	\chapter{Menus and Toolbars}
+		\section{Menus}
+			A menu bar has several menus, which contain several entries, which may include submenu entries. A menu entry can be checkable.
+
+			An application can have several toolbars, but only one menu bar.
+
+			\begin{sidenote}{Toolbar vs Menu Bar}
+				A toolbar displays icons instead of text to represent the task it can perform.
+			\end{sidenote}
+
+			When editing the text for a menu or submenu entry, if you add an ampersand character (\&) before any character, that character will be underlined in the menu, and will work as a shortcut key.
+
+			\subsection{Action Editor}
+				\begin{definition}{Action}
+					An operation that the user initiates through the user interface. Can be initiated by selecting a toolbar button, selecting a menu entry, or pressing a shortcut key.
+				\end{definition}
+				In Qt, an action is an instance of the \verb|QAction| class. These can be assigned to a menu or a toolbar button.
+				\begin{sidenote}{Action States}
+					\begin{description}[nosep]
+						\item[Normal] The icon's image or pixmap when the user is not interacting with the action, and is in enabled mode.
+						\item[Disabled] The icon's pixmap when the action is in disabled mode.
+						\item[Active] The icon's pixmap when the action is enabled and the user is interacting with it.
+						\item[Selected] The icon's pixmap when the action is selected.    
+					\end{description}
+				\end{sidenote}
+
+			The signal used to connect a \verb|QAction| to a slot is the \verb|triggered()| signal.
+			\begin{sidenote}{Signal and Slot Syntax Differences}
+				\begin{description}[style=nextline, leftmargin=1.5cm]
+					\item[PyQt4] \verb|self.connect(self.ui.actionName,|\\
+					\verb|QtCore.SIGNAL('signalName()'), self.slotFunction)|
+					\item[PyQt5] \verb|self.ui.actionName.signalName.connect(self.slotFunction)| 
+				\end{description}
+			\end{sidenote}
+
+		\section{Creating a Toolbar}
+			Toolbars typically use icons instead of text to indicate actions a user can perform. These icons are normally added to a program using a resource file.
+			\begin{definition}{Resource Files}
+				A resource file is used to add icons and other resources to an application. All resources added to a resource file need to have a prefix. A \concept{prefix} is a section or category name given to a resource.
+			\end{definition}
+			Toolbar buttons are usually created with actions.
+
+		\section{Tab Widget}
+			Used to display information in chunks. Enables one to split information into small sections, and display each section when the Tab button is selected.
+
+			\begin{definition}{Style Sheet Editor}
+				Apply styles to widgets to customise its appearance. You can add resources, gradients, colours, and fonts.
+			\end{definition}
+
+			The location of the tabs can be set using \verb|tabPosition|, which can be North, South, East, or West.
+
+		\section{Converting a Tab Widget}
+			To change a Tab Widget to another type, right click and select ``Morph Into''. It can be changed to a Tool Box, or a Stacked Widget.
+			\begin{definition}{Tool Box}
+				Instance of the \verb|QToolBox| class, provides a column of tabbed widget items, one above the next. Widgets of the current tab are displayed below it.
+			\end{definition}
+			\begin{definition}{Stacked Widget}
+				Instance of \verb|QStackWidget|. Provides a stack of widgets, where only one widget is visible at a time.
+
+				By default, does not have a way to switch pages, so use another widget, such as a Combo Box or List Widget to set the page. Every widget in a Stacked Widget has an index number.
+			\end{definition}
+
+		\rulechapterend
+
+\end{document}
