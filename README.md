@@ -1,4 +1,4 @@
-# UNISA COS1501 Notes
+# UNISA INF2611 Notes
 
 This repo contains the LaTeX files needed to compile a set of notes for the course **Visual Programming II** at the University of South Africa.
 
