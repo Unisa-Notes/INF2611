@@ -1,0 +1,136 @@
+\documentclass[notes.tex]{subfiles}
+
+\begin{document}
+	\setcounter{chapter}{3}
+	\chapter{Database Handling}
+		\section{Creating a Database}
+			\begin{definition}{Database}
+				A collection of information that is organised so that it can be easily accessed, managed, and updated.
+
+				Stores tables, indexes, foreign key constraints, primary key constraints, and other necessary components.
+
+				A database table consists of rows and columns. Each column contains a single pieces of information, and a row is a collection of columns that contains complete information of an object, item, or entity.
+			\end{definition}
+			\begin{sidenote}{Syntax for Creating a Database}
+				\verb|create database database_name;|
+			\end{sidenote}
+			\begin{sidenote}{MySQL Data Types}
+				\begin{descriptimize}[nosep]
+					\item[smallint, mediumint, int, bigint] Integer values
+					\item[float] Single-precision floating-point values 
+					\item[double] Double-precision floating-point values
+					\item[char] Fixed-length strings up to 255 characters
+					\item[varchar] Variable-length strings up to 255 characters
+					\item[tinyblob, blob, mediumblob, longblob] Large blocks of binary data
+					\item[tinytext, text, mediumtext, longtext] Long blocks of text data
+					\item[date] Date values
+					\item[time] Time values or durations
+					\item[datetime] Combined date and time values    
+				\end{descriptimize}
+			\end{sidenote}
+			\begin{sidenote}{Connecting to SQL server}
+				\begin{minted}[autogobble]{python}
+					import MySQLdb
+					conn = MySQLdb.connect(host="localhost", user="user_name",
+					                       passwd="password", db="db_name")
+					cursor = conn.cursor()
+				\end{minted}
+			\end{sidenote}
+			\begin{sidenote}{MySQLdb Methods}
+				\begin{description}[nosep, style=nextline, leftmargin=1cm, font=\texttt]
+					\item[MySQLdb.connect()] Connect to database server. (Returns database connection, normally variable is called \verb|conn|)Four parameters: host name, username, password, database name. Hostname specifies the location of the MySQL database server. For remote, specify the IP address. For local, use \verb|localhost|.
+					\item[conn.cursor()] Returns the cursor object from the connection. Used to traverse records from the result set.
+					\item[cursor.execute()] Execute an SQL query.
+					\item[conn.commit()] Apply modifications to a database table.
+					\item[conn.rollback()] Cancels all modifications applied to the database table. 
+					\item[cursor.close()] Close cursor.
+					\item[conn.close()] Disconnect database connection.
+				\end{description}
+			\end{sidenote}
+			\begin{sidenote}{Some MySQL Commands}
+				\begin{itemize}[nosep]
+					\item \verb|use database_name;|
+					\item \verb|show tables;|
+					\item \verb|describe table_name;|
+				\end{itemize}
+			\end{sidenote}
+			\begin{sidenote}{SQL INSERT}
+				Used to insert rows into a table.
+				\begin{minted}[autogobble]{sql}
+					INSERT INTO table_name (table_column1, table_column2)
+					VALUES (value1, value2);
+				\end{minted}
+			\end{sidenote}
+			\pagebreak
+			\subsection{Fetching Rows from a Table}
+				Use the \verb|SELECT| SQL statement, via \verb|execute()| on a cursor object. A \verb|resultset| object is created that contains the tows from the database that satisfy the query.
+				\begin{sidenote}{Result Set Cursor Methods}
+					While a result set is created, you access it using the cursor. There are two possible methods:
+					\begin{description}[nosep, font=\texttt]
+						\item[cursor.fetchone()] Fetches the next row in result set.
+						\item[cursor.fetchall()] Fetches the remaining rows in result set, or all, if none have been fetched.
+					\end{description}
+				\end{sidenote}
+				You also use \verb|SELECT| to search for a specific value in the table.
+				\begin{minted}[autogobble]{sql}
+					SELECT * FROM table_name where attribute=value;
+				\end{minted}
+				You use UPDATE to change information, if it is found.
+				\begin{minted}[autogobble]{sql}
+					SELECT * from table_name where attribute=value;
+					UPDATE table_name set attribute=value2 where attribute=value;
+				\end{minted}
+				You use DELETE to remove a row from a table.
+				\begin{minted}[autogobble]{sql}
+					SELECT * from table_name where attribute=value;
+					DELETE from table_name where attribute=value;
+				\end{minted}
+
+		\section{Database Maintenance Through GUI Programs}
+			To integrate and access databases in PyQt, you use the \verb|QSqlDatabase| class.
+			\begin{sidenote}{QSqlDatabase Methods}
+				\begin{descriptimize}[nosep]
+					\item[\texttt{addDatabase()}] Specify the database driver of the database to which you want to establish a connection.
+						\begin{itemize}[nosep]
+							\item \textbf{QDB2}: IBM DB2
+							\item \textbf{QMYSQL}: MySQL
+							\item \textbf{QOCI}: Oracle Call Interface
+							\item \textbf{QODBC}: ODBC (includes Microsoft SQL Server)
+							\item \textbf{QPSQL}: PostgreSQL
+							\item \textbf{QSQLITE}: SQLite version 3 or above
+						\end{itemize}
+					\item[\texttt{setHostName()}]
+					\item[\texttt{setDatabaseName()}]
+					\item[\texttt{setUserName()}]
+					\item[\texttt{setPassword()}]
+					\item[\texttt{open()}] Opens the database connection using the current connection attributes. Returns either \verb|True| or \verb|False|, depending on whether the connection to the database is successfully established or not.
+					\item[\texttt{lastError()}] Display error information that may occur while opening a connection with the database through the \verb|open()| function.
+				\end{descriptimize}
+			\end{sidenote}
+
+			\pagebreak
+			\subsection{Displaying Rows}
+				Use a \verb|QTableView| with a custom model.
+				\begin{definition}{Model}
+					A mirror image of the database table that the user can use to navigate and edit if required.
+				\end{definition}
+				The model used is an instance of the \verb|QSqlTableModel| class.
+				\begin{definition}{QSqlTableModel}
+					Provides a model that can be set to display information of a database table. Also makes it easy to navigate the model, and set editing strategy for the underlying database tables.
+					\begin{sidenote}{Methods}
+						\begin{description}[nosep, font=\texttt]
+							\item[setTable()] Specify database table for the model.
+							\item[setEditStrategy()] Applies the strategy for editing the database table.
+								\begin{descriptimize}[nosep]
+									\item[OnFieldChange] All modifications made in the model applied immediately to the database table.
+									\item[OnRowChange] All modifications made to a row applied to the database table when moving to a different row.
+									\item[OnManualSubmit] All modifications cached in the model and applied to the database table when \verb|submitAll()| is called. The modifications that have been cached can be cancelled or erased by called \verb|revertAll()|
+								\end{descriptimize}
+							\item[select()]
+						\end{description}
+					\end{sidenote}
+				\end{definition}
+
+		\ifSubfilesClassLoaded{%
+			\vbox{\rulechapterend}}{\vspace*{\parskip}\rulebookend}
+\end{document}

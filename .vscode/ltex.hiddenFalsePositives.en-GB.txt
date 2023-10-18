@@ -4,3 +4,5 @@
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[MMMM] Month in long form.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[dddd] Day in long form.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[ddd] Day in abbreviated form.\\E$"}
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QYou use DELETE to remove a row from a table.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QQDB2: IBM DB2 QMYSQL: MySQL QOCI: Oracle Call Interface QODBC: ODBC (includes Microsoft SQL Server) QPSQL: PostgreSQL QSQLITE: SQLite version 3 or above [setHostName()] [setDatabaseName()] [setUserName()] [setPassword()] [open()] Opens the database connection using the current connection attributes.\\E$"}
