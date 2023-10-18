@@ -1,0 +1,72 @@
+\documentclass[notes.tex]{subfiles}
+
+\begin{document}
+	\setcounter{chapter}{2}
+	\chapter{Multiple Documents and Layouts}
+		\section{Multiple Document Interface (MDI)}
+			Applications that provide one document per main window are said to be SDI (single-document interface) applications. A multiple-document interface (MDI) consists of a main window containing a menu bar, toolbar, and a central \verb|QWorkspace| widget. The central workspace displays and manages several child windows.
+
+			To implement an MDI, use an instance of \verb|QMdiArea|. This widget provides an area where child windows (\concept{subwindows}) are displayed. It arranges subwindows in a \concept{cascade} or \concept{tile} pattern. The subwindows are instances of \verb|QMdiSubWindow|. They are rendered within a frame that has a title, and buttons to show, hide and maximise it.
+
+			\begin{sidenote}{QMdiArea Methods}
+				\begin{itemize}[nosep]
+					\item \verb|subWindowList()|
+					\item \verb|windowOrder()|
+						\begin{itemize}[nosep]
+							\item \verb|CreationOrder| (Default)
+							\item \verb|StackingOrder|
+							\item \verb|ActivationHistoryOrder|
+						\end{itemize}
+					\item \verb|activateNextSubWindow()|
+					\item \verb|activatePreviousSubWindow()|
+					\item \verb|cacadeSubWindows()|
+					\item \verb|tileSubWindows()|
+					\item \verb|closeAllSubWindows()|
+					\item \verb|setViewMode()|
+						\begin{itemize}[nosep]
+							\item \verb|SubWindow View|: (Default) Displays subwindows with window frames. Represented by $0$.
+							\item \verb|Tabbed View|: Displays subwindows with tabs in a tab bar. Represented by $1$.
+						\end{itemize}
+				\end{itemize}
+			\end{sidenote}
+
+		\section{Layouts}
+			\begin{definition}{Layout}
+				Used to arrange and manage the widgets that make up a user interface within its container.
+			\end{definition}
+			Each widget has a recommended size defined in its \verb|sizeHint| property. When windows are resized, widgets in a layout are resized to meet their size hint.
+
+			To avoid excessive spreading of widgets when the window size is increased, use \concept{spacers}.
+			\subsection{Horizontal Layout}
+				Lays widgets next to each other in a row.
+				\begin{definition}{Group Box}
+					Used to represent information that is related in some way. An instance of \verb|QGroupBox|. Appears in a frame with a title.
+
+					Child widgets within a Group Box can be aligned and enabled or disabled collectively with a CheckBox.
+					\begin{sidenote}{QGroupBox Properties}
+						\begin{description}
+							\item[checkable] Display a checkbox in Group Box's title. Child widgets enabled only when checkbox is checked. By default, GroupBoxes are not checkable.
+							\item[flat] Space consumed by GroupBox is reduced.  
+						\end{description}
+					\end{sidenote}
+					\begin{sidenote}{QGroupBox Methods}
+						\vspace*{-0.5cm}
+						\begin{multicols}{3}
+							\begin{itemize}[nosep]
+								\item \verb|isCheckable()|
+								\item \verb|isChecked()|
+								\item \verb|setChecked()|
+							\end{itemize}
+						\end{multicols}
+					\end{sidenote}
+					Generates a \verb|clicked()| signal when the checkbox is selected, or when its shortcut key is pressed.
+				\end{definition}
+
+			\subsection{Vertical Layout}
+				Arrange widgets vertically, in a column one below another.
+
+			\subsection{Other Layouts}
+				Other layouts include GridLayout, and FormLayout.
+
+		\rulechapterend
+\end{document}
